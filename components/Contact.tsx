@@ -15,9 +15,7 @@ export default function Contact() {
         >
           {/* Large Contact Heading */}
           <h2 className="text-[10vw] md:text-[8vw] font-['Bebas_Neue'] font-black leading-none mb-16">
-            LET&apos;S
-            <br />
-            <span className="text-red-600">CONNECT</span>
+            <span className="text-red-600">CONTACT</span>
           </h2>
 
           {/* Contact Info */}
