@@ -16,35 +16,74 @@ export default function Hero() {
   return (
     <section ref={containerRef} className="relative h-screen overflow-hidden bg-black">
 
-      {/* Background Image - Parallax with subtle zoom */}
+      {/* Background Image - Parallax */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{ y }}
-        animate={{
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
       >
-        <motion.div
+        <div
           className="w-full h-full bg-cover bg-center opacity-40"
           style={{
             backgroundImage: 'url(/images/portrait/main.jpg)',
             filter: 'grayscale(50%)'
           }}
+        />
+      </motion.div>
+
+      {/* Smokey Overlay Effect */}
+      <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+        {/* Smoke Layer 1 */}
+        <motion.div
+          className="absolute inset-0 opacity-20"
+          style={{
+            background: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)',
+          }}
           animate={{
-            filter: ['grayscale(50%)', 'grayscale(30%)', 'grayscale(50%)'],
+            x: ['-20%', '20%', '-20%'],
+            scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: 15,
+            duration: 25,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         />
-      </motion.div>
+
+        {/* Smoke Layer 2 */}
+        <motion.div
+          className="absolute inset-0 opacity-15"
+          style={{
+            background: 'radial-gradient(circle at 80% 30%, rgba(255,0,0,0.08) 0%, transparent 60%)',
+          }}
+          animate={{
+            x: ['20%', '-20%', '20%'],
+            y: ['0%', '10%', '0%'],
+            scale: [1.1, 1, 1.1],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        {/* Smoke Layer 3 */}
+        <motion.div
+          className="absolute inset-0 opacity-10"
+          style={{
+            background: 'radial-gradient(circle at 50% 80%, rgba(255,255,255,0.06) 0%, transparent 70%)',
+          }}
+          animate={{
+            y: ['10%', '-10%', '10%'],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
 
       {/* Massive Text with Image Behind */}
       <motion.div
