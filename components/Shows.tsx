@@ -94,11 +94,14 @@ export default function Shows() {
                 />
               </div>
 
-              {/* Gradient Overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${show.color} opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
-
               {/* Content */}
-              <div className="relative z-10 h-full flex flex-col justify-end p-6">
+              <motion.div
+                className="relative z-10 h-full flex flex-col justify-end p-6"
+                animate={{
+                  y: hoveredIndex === index ? -8 : 0
+                }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
                 <div>
                   <div className="text-xs uppercase tracking-wider text-gray-300 mb-2">
                     {show.platform}
@@ -119,7 +122,7 @@ export default function Shows() {
                     LISTEN NOW <span className="text-xl">→</span>
                   </motion.div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Border */}
               <motion.div
