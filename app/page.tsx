@@ -16,9 +16,10 @@ export default function Home() {
       <Contact />
 
       {/* Footer */}
-      <footer className="bg-black border-t border-zinc-900 py-8 px-6">
-        <div className="max-w-7xl mx-auto text-center text-gray-600 text-sm">
-          <p>© {new Date().getFullYear()} Peter Rosenberg. All rights reserved.</p>
+      <footer className="bg-black text-white py-12 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm">© {new Date().getFullYear()} Peter Rosenberg</p>
+          <p className="text-sm text-gray-500">New York City</p>
         </div>
       </footer>
     </main>
