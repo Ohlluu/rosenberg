@@ -14,7 +14,7 @@ export default function Contact() {
           transition={{ duration: 1 }}
         >
           {/* Large Contact Heading */}
-          <h2 className="text-[15vw] md:text-[12vw] font-['Bebas_Neue'] font-black leading-none mb-16">
+          <h2 className="text-[10vw] md:text-[8vw] font-['Bebas_Neue'] font-black leading-none mb-16">
             LET&apos;S
             <br />
             <span className="text-red-600">CONNECT</span>

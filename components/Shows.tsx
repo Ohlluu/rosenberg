@@ -8,7 +8,6 @@ const shows = [
   {
     title: "EBRO IN THE MORNING",
     platform: "Hot 97",
-    icon: "🎙️",
     time: "6-10AM EST",
     description: "NYC's #1 Morning Show",
     link: "https://podcasts.apple.com/us/podcast/ebro-in-the-morning-podcast/id1236941416",
@@ -18,7 +17,6 @@ const shows = [
   {
     title: "MICHAEL KAY SHOW",
     platform: "ESPN 98.7",
-    icon: "🏀",
     time: "3-7PM EST",
     description: "New York Sports Talk",
     link: "https://podcasts.apple.com/us/podcast/the-michael-kay-show/id208643372",
@@ -28,7 +26,6 @@ const shows = [
   {
     title: "CHEAP HEAT",
     platform: "Podcast",
-    icon: "🤼",
     time: "Weekly",
     description: "Wrestling Deep Dives",
     link: "https://podcasts.apple.com/us/podcast/cheap-heat-with-peter-rosenberg/id1740794209",
@@ -83,7 +80,7 @@ export default function Shows() {
                   className="object-cover transition-all duration-700"
                   style={{
                     transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)',
-                    filter: 'grayscale(100%) brightness(0.4)'
+                    filter: hoveredIndex === index ? 'brightness(0.6)' : 'brightness(0.5)'
                   }}
                 />
               </div>
@@ -92,21 +89,9 @@ export default function Shows() {
               <div className={`absolute inset-0 bg-gradient-to-br ${show.color} opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
 
               {/* Content */}
-              <div className="relative z-10 h-full flex flex-col justify-between p-8">
-                {/* Icon */}
-                <motion.div
-                  className="text-6xl"
-                  animate={{
-                    scale: hoveredIndex === index ? [1, 1.2, 1] : 1
-                  }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {show.icon}
-                </motion.div>
-
-                {/* Text */}
+              <div className="relative z-10 h-full flex flex-col justify-end p-8">
                 <div>
-                  <div className="text-sm uppercase tracking-wider text-gray-400 mb-2">
+                  <div className="text-sm uppercase tracking-wider text-gray-300 mb-2">
                     {show.platform}
                   </div>
                   <h3 className="text-4xl font-['Bebas_Neue'] leading-tight mb-3">

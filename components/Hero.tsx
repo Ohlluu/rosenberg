@@ -37,7 +37,7 @@ export default function Hero() {
       >
         <div className="text-center">
           <motion.h1
-            className="text-[18vw] md:text-[20vw] font-['Bebas_Neue'] font-black leading-[0.85] tracking-tighter"
+            className="text-[15vw] md:text-[16vw] font-['Bebas_Neue'] font-black leading-[0.85] tracking-tighter"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -57,7 +57,7 @@ export default function Hero() {
             {' · '}
             <span className="text-red-600">ESPN</span>
             {' · '}
-            <span className="text-red-600">NYC</span>
+            <span className="text-red-600">WWE</span>
           </motion.div>
         </div>
       </motion.div>
