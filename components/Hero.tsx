@@ -16,16 +16,32 @@ export default function Hero() {
   return (
     <section ref={containerRef} className="relative h-screen overflow-hidden bg-black">
 
-      {/* Background Image - Parallax */}
+      {/* Background Image - Parallax with subtle zoom */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{ y }}
+        animate={{
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
       >
-        <div
+        <motion.div
           className="w-full h-full bg-cover bg-center opacity-40"
           style={{
             backgroundImage: 'url(/images/portrait/main.jpg)',
             filter: 'grayscale(50%)'
+          }}
+          animate={{
+            filter: ['grayscale(50%)', 'grayscale(30%)', 'grayscale(50%)'],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
           }}
         />
       </motion.div>
