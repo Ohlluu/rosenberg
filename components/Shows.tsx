@@ -32,6 +32,15 @@ const shows = [
     image: "/images/logos/cheap-heat.jpg",
     color: "from-purple-600 to-pink-600"
   },
+  {
+    title: "ENN WITH PETER ROSENBERG",
+    platform: "Podcast",
+    time: "Weekly",
+    description: "Entertainment News Now",
+    link: "https://podcasts.apple.com/us/podcast/enn-with-peter-rosenberg/id1095755250",
+    image: "/images/logos/enn.jpg",
+    color: "from-blue-600 to-cyan-600"
+  },
 ];
 
 export default function Shows() {
@@ -55,8 +64,8 @@ export default function Shows() {
           <p className="text-xl text-gray-400 uppercase tracking-wider">Where to catch Rosenberg</p>
         </motion.div>
 
-        {/* Shows Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Shows Grid - 4 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {shows.map((show, index) => (
             <motion.a
               key={index}
@@ -67,7 +76,7 @@ export default function Shows() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -89,25 +98,25 @@ export default function Shows() {
               <div className={`absolute inset-0 bg-gradient-to-br ${show.color} opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
 
               {/* Content */}
-              <div className="relative z-10 h-full flex flex-col justify-end p-8">
+              <div className="relative z-10 h-full flex flex-col justify-end p-6">
                 <div>
-                  <div className="text-sm uppercase tracking-wider text-gray-300 mb-2">
+                  <div className="text-xs uppercase tracking-wider text-gray-300 mb-2">
                     {show.platform}
                   </div>
-                  <h3 className="text-4xl font-['Bebas_Neue'] leading-tight mb-3">
+                  <h3 className="text-3xl font-['Bebas_Neue'] leading-tight mb-2">
                     {show.title}
                   </h3>
-                  <div className="text-sm text-gray-300 mb-2">{show.time}</div>
-                  <div className="text-lg font-semibold">{show.description}</div>
+                  <div className="text-xs text-gray-300 mb-1">{show.time}</div>
+                  <div className="text-sm font-semibold">{show.description}</div>
 
                   {/* Arrow */}
                   <motion.div
-                    className="mt-6 flex items-center gap-2 text-sm uppercase tracking-wider"
+                    className="mt-4 flex items-center gap-2 text-xs uppercase tracking-wider"
                     animate={{
                       x: hoveredIndex === index ? 10 : 0
                     }}
                   >
-                    LISTEN NOW <span className="text-2xl">→</span>
+                    LISTEN NOW <span className="text-xl">→</span>
                   </motion.div>
                 </div>
               </div>

@@ -9,7 +9,7 @@ const photos = [
   { src: "/images/action/action-1.jpg", title: "On Air", layout: "small" },
   { src: "/images/action/action-3.jpg", title: "Hip-Hop", layout: "tall" },
   { src: "/images/guests/guest-1.jpg", title: "The Guests", layout: "wide" },
-  { src: "/images/action/action-4.jpg", title: "WWE", layout: "small" },
+  { src: "/images/action/action-4.jpg", title: "Broadcaster, Host, DJ & 1 Time - WWE 24/7 Champion", layout: "small" },
 ];
 
 export default function Gallery() {
@@ -27,19 +27,6 @@ export default function Gallery() {
   return (
     <section ref={containerRef} className="relative bg-black py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-8">
-
-        {/* Title */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-8xl md:text-9xl font-['Bebas_Neue'] text-white leading-none">
-            IN<br/>ACTION
-          </h2>
-        </motion.div>
 
         {/* Bento Box Style Grid */}
         <div className="grid grid-cols-12 gap-4 auto-rows-[200px]">
@@ -164,7 +151,7 @@ export default function Gallery() {
             </motion.div>
           </motion.div>
 
-          {/* Photo 5 - Square */}
+          {/* Photo 5 - WWE Champion Label */}
           <motion.div
             className="col-span-6 md:col-span-5 row-span-2 relative overflow-hidden group cursor-pointer"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -185,11 +172,13 @@ export default function Gallery() {
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-red-600/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <motion.div
-              className="absolute bottom-6 left-6"
+              className="absolute bottom-6 left-6 right-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: hoveredIndex === 4 ? 1 : 0 }}
             >
-              <h3 className="text-4xl font-['Bebas_Neue'] text-white">{photos[4].title}</h3>
+              <h3 className="text-2xl md:text-3xl font-['Bebas_Neue'] text-white leading-tight">
+                {photos[4].title}
+              </h3>
             </motion.div>
           </motion.div>
 
