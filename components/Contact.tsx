@@ -85,7 +85,7 @@ export default function Contact() {
               GET IN TOUCH
             </span>
           </h2>
-          <p className="text-xl text-gray-400 mt-4">Connect, collaborate, or just say what's up</p>
+          <p className="text-xl text-gray-400 mt-4">Connect, collaborate, or just say what&apos;s up</p>
           <div className="w-24 h-1 bg-gradient-to-r from-hot97-red to-electric-blue mx-auto mt-6"></div>
         </motion.div>
 
@@ -202,7 +202,7 @@ export default function Contact() {
         >
           <div className="inline-block p-8 bg-gradient-to-r from-hot97-red/10 via-espn-yellow/10 to-electric-blue/10 rounded-2xl border-2 border-white/10">
             <p className="text-3xl md:text-4xl font-light text-gray-300 mb-4">
-              "Broadcasting from the greatest city in the world"
+              &quot;Broadcasting from the greatest city in the world&quot;
             </p>
             <div className="flex items-center justify-center gap-2 text-espn-yellow">
               <span className="text-2xl">🗽</span>

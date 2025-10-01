@@ -118,7 +118,7 @@ export default function About() {
               >
                 Peter Rosenberg is a multi-platform media powerhouse who has become
                 <span className="text-hot97-red font-semibold"> the voice of New York culture</span>.
-                From hosting Hot 97's legendary morning show to ESPN's sports talk,
+                From hosting Hot 97&apos;s legendary morning show to ESPN&apos;s sports talk,
                 from deep-dive hip-hop conversations on Juan Epstein to wrestling analysis
                 on Cheap Heat, Rosenberg bridges generations and genres with his
                 <span className="text-electric-blue font-semibold"> quirky, honest, and unique perspective</span>.
@@ -130,11 +130,11 @@ export default function About() {
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.8 }}
               >
-                A kid from Maryland who earned his stripes in the world's toughest media market,
+                A kid from Maryland who earned his stripes in the world&apos;s toughest media market,
                 Rosenberg has interviewed everyone from Jay-Z and Eminem to Mike Tyson,
                 becoming a trusted voice across music, sports, and entertainment.
                 His ability to cross cultural boundaries while maintaining authenticity
-                has earned him millions of fans and recognition as a "40 Under 40 Industry Leader."
+                has earned him millions of fans and recognition as a &quot;40 Under 40 Industry Leader.&quot;
               </motion.p>
             </div>
 
