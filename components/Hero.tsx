@@ -39,12 +39,65 @@ export default function Hero() {
           <motion.h1
             className="text-[15vw] md:text-[16vw] font-['Bebas_Neue'] font-black leading-[0.85] tracking-tighter"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            PETER
+            {/* PETER with subtle shift */}
+            <motion.span
+              className="inline-block"
+              animate={{
+                x: [0, 3, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <motion.span
+                animate={{
+                  color: ['#ffffff', '#ff0000', '#ffffff'],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                PETER
+              </motion.span>
+            </motion.span>
             <br />
-            ROSENBERG
+            {/* ROSENBERG with opposite subtle shift */}
+            <motion.span
+              className="inline-block"
+              animate={{
+                x: [0, -3, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2
+              }}
+            >
+              <motion.span
+                animate={{
+                  color: ['#ffffff', '#ff0000', '#ffffff'],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 3
+                }}
+              >
+                ROSENBERG
+              </motion.span>
+            </motion.span>
           </motion.h1>
 
           <motion.div
