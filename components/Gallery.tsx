@@ -1,58 +1,72 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import Image from 'next/image';
 
 const photos = [
-  { src: "/images/portrait/main.jpg", alt: "Peter Rosenberg", span: "row-span-2" },
-  { src: "/images/action/action-1.jpg", alt: "On Air", span: "" },
-  { src: "/images/action/action-3.jpg", alt: "Hip-Hop Culture", span: "" },
-  { src: "/images/portrait/suit.jpg", alt: "Peter Rosenberg", span: "row-span-2" },
-  { src: "/images/action/action-4.jpg", alt: "WWE Event", span: "" },
-  { src: "/images/guests/guest-1.jpg", alt: "With Guest", span: "" },
+  { src: "/images/portrait/main.jpg", span: "col-span-2 row-span-2" },
+  { src: "/images/action/action-1.jpg", span: "col-span-1" },
+  { src: "/images/action/action-3.jpg", span: "col-span-1" },
+  { src: "/images/portrait/suit.jpg", span: "col-span-1 row-span-2" },
+  { src: "/images/action/action-4.jpg", span: "col-span-1" },
+  { src: "/images/guests/guest-1.jpg", span: "col-span-2" },
 ];
 
 export default function Gallery() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const titleX = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
 
   return (
-    <section ref={ref} className="py-32 px-6 md:px-12 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section ref={containerRef} className="relative bg-black py-32 overflow-hidden">
 
-        {/* Masonry Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[300px] gap-4">
+      {/* Background Text */}
+      <motion.div
+        className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap text-[30vw] font-['Bebas_Neue'] font-black text-white/5 pointer-events-none"
+        style={{ x: titleX }}
+      >
+        ROSENBERG • ROSENBERG • ROSENBERG •
+      </motion.div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-8">
+
+        {/* Title */}
+        <motion.h2
+          className="text-8xl md:text-9xl font-['Bebas_Neue'] text-white mb-20"
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          IN ACTION
+        </motion.h2>
+
+        {/* Photo Grid */}
+        <div className="grid grid-cols-4 auto-rows-[250px] gap-4">
           {photos.map((photo, index) => (
             <motion.div
               key={index}
-              className={`relative overflow-hidden bg-gray-100 cursor-pointer ${photo.span}`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.08 }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className={`relative overflow-hidden ${photo.span} group cursor-pointer`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ scale: 0.98 }}
             >
               <Image
                 src={photo.src}
-                alt={photo.alt}
+                alt="Peter Rosenberg"
                 fill
-                className="object-cover transition-transform duration-700 ease-out"
-                style={{
-                  transform: hoveredIndex === index ? 'scale(1.08)' : 'scale(1)',
-                }}
+                className="object-cover transition-all duration-700 group-hover:scale-110"
               />
 
-              {/* Caption overlay on hover */}
-              <motion.div
-                className="absolute inset-0 bg-black/60 flex items-end p-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <p className="text-white text-xl font-display font-bold">{photo.alt}</p>
-              </motion.div>
+              {/* Red Overlay on Hover */}
+              <div className="absolute inset-0 bg-red-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.div>
           ))}
         </div>

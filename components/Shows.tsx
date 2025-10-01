@@ -1,108 +1,139 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 import Image from 'next/image';
 
 const shows = [
   {
-    title: "Ebro in the Morning",
-    subtitle: "Hot 97",
-    schedule: "Weekdays 6-10AM EST",
-    description: "NYC&apos;s #1 morning show for hip-hop culture and real talk",
+    title: "EBRO IN THE MORNING",
+    platform: "Hot 97",
+    icon: "🎙️",
+    time: "6-10AM EST",
+    description: "NYC's #1 Morning Show",
     link: "https://podcasts.apple.com/us/podcast/ebro-in-the-morning-podcast/id1236941416",
-    logo: "/images/logos/ebro.jpg",
+    image: "/images/logos/ebro.jpg",
+    color: "from-red-600 to-red-800"
   },
   {
-    title: "The Michael Kay Show",
-    subtitle: "ESPN 98.7 NY",
-    schedule: "Weekdays 3-7PM EST",
-    description: "New York sports talk with the voice of the Yankees",
+    title: "MICHAEL KAY SHOW",
+    platform: "ESPN 98.7",
+    icon: "🏀",
+    time: "3-7PM EST",
+    description: "New York Sports Talk",
     link: "https://podcasts.apple.com/us/podcast/the-michael-kay-show/id208643372",
-    logo: "/images/logos/michael-kay.jpg",
+    image: "/images/logos/michael-kay.jpg",
+    color: "from-yellow-500 to-orange-600"
   },
   {
-    title: "Cheap Heat",
-    subtitle: "Podcast",
-    schedule: "Weekly",
-    description: "Wrestling analysis from WWE to the indies",
+    title: "CHEAP HEAT",
+    platform: "Podcast",
+    icon: "🤼",
+    time: "Weekly",
+    description: "Wrestling Deep Dives",
     link: "https://podcasts.apple.com/us/podcast/cheap-heat-with-peter-rosenberg/id1740794209",
-    logo: "/images/logos/cheap-heat.jpg",
+    image: "/images/logos/cheap-heat.jpg",
+    color: "from-purple-600 to-pink-600"
   },
 ];
 
 export default function Shows() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="py-32 px-6 md:px-12 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative min-h-screen bg-zinc-950 py-32">
+      <div className="max-w-7xl mx-auto px-8">
 
-        {/* Title */}
-        <motion.h2
-          className="text-7xl md:text-8xl font-display font-black mb-20"
+        {/* Section Title */}
+        <motion.div
+          className="mb-24"
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          Listen
-        </motion.h2>
+          <h2 className="text-8xl md:text-9xl font-['Bebas_Neue'] text-white mb-4">
+            TUNE IN
+          </h2>
+          <p className="text-xl text-gray-400 uppercase tracking-wider">Where to catch Rosenberg</p>
+        </motion.div>
 
-        {/* Shows List */}
-        <div className="space-y-16">
+        {/* Shows Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {shows.map((show, index) => (
             <motion.a
-              key={show.title}
+              key={index}
               href={show.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block"
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
+              className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={show.image}
+                  alt={show.title}
+                  fill
+                  className="object-cover transition-all duration-700"
+                  style={{
+                    transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)',
+                    filter: 'grayscale(100%) brightness(0.4)'
+                  }}
+                />
+              </div>
 
-                {/* Image */}
-                <div className="md:col-span-5 relative aspect-[16/10] overflow-hidden bg-gray-100">
-                  <Image
-                    src={show.logo}
-                    alt={show.title}
-                    fill
-                    className="object-cover transition-all duration-700 ease-out"
-                    style={{
-                      transform: hoveredIndex === index ? 'scale(1.05)' : 'scale(1)',
-                      filter: hoveredIndex === index ? 'grayscale(0%)' : 'grayscale(100%)',
+              {/* Gradient Overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${show.color} opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
+
+              {/* Content */}
+              <div className="relative z-10 h-full flex flex-col justify-between p-8">
+                {/* Icon */}
+                <motion.div
+                  className="text-6xl"
+                  animate={{
+                    scale: hoveredIndex === index ? [1, 1.2, 1] : 1
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {show.icon}
+                </motion.div>
+
+                {/* Text */}
+                <div>
+                  <div className="text-sm uppercase tracking-wider text-gray-400 mb-2">
+                    {show.platform}
+                  </div>
+                  <h3 className="text-4xl font-['Bebas_Neue'] leading-tight mb-3">
+                    {show.title}
+                  </h3>
+                  <div className="text-sm text-gray-300 mb-2">{show.time}</div>
+                  <div className="text-lg font-semibold">{show.description}</div>
+
+                  {/* Arrow */}
+                  <motion.div
+                    className="mt-6 flex items-center gap-2 text-sm uppercase tracking-wider"
+                    animate={{
+                      x: hoveredIndex === index ? 10 : 0
                     }}
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="md:col-span-7 space-y-4">
-                  <div>
-                    <h3 className="text-4xl md:text-5xl font-display font-bold mb-2 group-hover:text-red-600 transition-colors">
-                      {show.title}
-                    </h3>
-                    <p className="text-xl font-semibold text-gray-500">{show.subtitle}</p>
-                  </div>
-
-                  <p className="text-lg text-gray-600">{show.schedule}</p>
-
-                  <p className="text-xl md:text-2xl font-light leading-relaxed">
-                    {show.description}
-                  </p>
-
-                  <div className="pt-4">
-                    <span className="inline-block text-sm font-semibold tracking-wider uppercase border-b-2 border-black group-hover:border-red-600 transition-colors pb-1">
-                      Listen Now →
-                    </span>
-                  </div>
+                  >
+                    LISTEN NOW <span className="text-2xl">→</span>
+                  </motion.div>
                 </div>
               </div>
+
+              {/* Border */}
+              <motion.div
+                className="absolute inset-0 border-2 border-white"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+              />
             </motion.a>
           ))}
         </div>

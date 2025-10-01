@@ -1,61 +1,91 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 export default function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ['20%', '-20%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
 
   return (
-    <section ref={ref} className="py-32 px-6 md:px-12 bg-[#fafafa]">
-      <div className="max-w-6xl mx-auto">
+    <section ref={containerRef} className="relative min-h-screen bg-black overflow-hidden py-32">
 
+      {/* Background Text - Photo Fill */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
+          className="text-[25vw] font-['Bebas_Neue'] font-black leading-none text-clip-image"
+          style={{
+            backgroundImage: 'url(/images/action/action-3.jpg)',
+            y: imageY
+          }}
         >
-          {/* Left: Large Title */}
-          <div>
-            <h2 className="text-7xl md:text-8xl font-display font-black leading-[0.9] mb-8 sticky top-24">
-              About
-            </h2>
-          </div>
-
-          {/* Right: Content */}
-          <div className="space-y-8 text-xl md:text-2xl leading-relaxed font-light">
-            <p>
-              Peter Rosenberg is a <span className="font-semibold">multi-platform media personality</span> known
-              for his work across radio, podcasting, and television.
-            </p>
-
-            <p>
-              Currently co-hosting <span className="font-semibold italic">Ebro in the Morning</span> on Hot 97
-              and appearing on <span className="font-semibold italic">The Michael Kay Show</span> on ESPN New York,
-              Rosenberg bridges the worlds of hip-hop and sports daily.
-            </p>
-
-            <p>
-              His podcasts—<span className="font-semibold italic">Cheap Heat</span> (wrestling) and{' '}
-              <span className="font-semibold italic">Juan Epstein</span> (hip-hop)—showcase his range and depth
-              across culture.
-            </p>
-
-            <p>
-              Over <span className="font-semibold">20+ years</span>, he&apos;s interviewed Jay-Z, Eminem,
-              Kendrick Lamar, and Mike Tyson. Previously hosted MTV2&apos;s{' '}
-              <span className="font-semibold italic">Hip Hop Squares</span> and created the{' '}
-              <span className="font-semibold italic">Noisemakers</span> series.
-            </p>
-
-            <p className="text-base text-gray-500 pt-4">
-              UJA-Federation &quot;40 Under 40 Industry Leader&quot; • WWE Kickoff Host • Maryland Native
-            </p>
-          </div>
+          CULTURE
         </motion.div>
       </div>
+
+      {/* Content */}
+      <motion.div
+        className="relative z-10 max-w-7xl mx-auto px-8"
+        style={{ y: textY }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="max-w-4xl mx-auto"
+        >
+          {/* Large Quote */}
+          <h2 className="text-5xl md:text-7xl font-['Bebas_Neue'] mb-16 leading-tight">
+            <span className="text-red-600">FROM MARYLAND TO</span>
+            <br />
+            <span className="text-white">THE VOICE OF NEW YORK</span>
+          </h2>
+
+          {/* Bio Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg leading-relaxed">
+            <div className="space-y-6">
+              <p className="text-gray-300">
+                Peter Rosenberg is a <span className="text-white font-semibold">multi-platform media powerhouse</span> who has spent over two decades becoming the definitive voice bridging hip-hop, sports, and entertainment.
+              </p>
+              <p className="text-gray-300">
+                Co-hosting <span className="text-red-600 font-semibold">Ebro in the Morning</span> on Hot 97 and appearing on ESPN&apos;s <span className="text-red-600 font-semibold">Michael Kay Show</span>, Rosenberg commands attention across New York&apos;s most influential airwaves.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-gray-300">
+                His podcasts—<span className="text-white font-semibold">Cheap Heat</span> for wrestling and <span className="text-white font-semibold">Juan Epstein</span> for hip-hop—dive deep into culture with authenticity and passion.
+              </p>
+              <p className="text-gray-300">
+                From interviewing Jay-Z and Eminem to hosting WWE kickoffs and MTV2&apos;s Hip Hop Squares, Rosenberg <span className="text-white font-semibold">crosses boundaries while staying true</span> to the culture.
+              </p>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-8 mt-24 pt-12 border-t border-white/10">
+            <div>
+              <div className="text-5xl font-['Bebas_Neue'] text-red-600 mb-2">20+</div>
+              <div className="text-sm uppercase tracking-wider text-gray-500">Years in Radio</div>
+            </div>
+            <div>
+              <div className="text-5xl font-['Bebas_Neue'] text-red-600 mb-2">1000+</div>
+              <div className="text-sm uppercase tracking-wider text-gray-500">Interviews</div>
+            </div>
+            <div>
+              <div className="text-5xl font-['Bebas_Neue'] text-red-600 mb-2">3M+</div>
+              <div className="text-sm uppercase tracking-wider text-gray-500">Daily Listeners</div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
